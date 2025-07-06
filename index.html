@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login | Telegram + Firebase</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    <script src="firebase-config.js"></script>
+
+    <style>
+        body {
+            font-family: sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            margin: 0;
+        }
+        .login-box {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        #user-info {
+            margin-top: 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-box">
+        <h2>🔷 Login with Telegram</h2>
+        <script async src="https://telegram.org/js/telegram-widget.js?7"
+                data-telegram-login="YOUR_BOT_USERNAME" 
+                data-size="large"
+                data-userpic="true"
+                data-radius="10"
+                data-auth-url="https://YOUR_DOMAIN/telegram-auth.html"
+                data-request-access="write">
+        </script>
+        <div id="user-info"></div>
+    </div>
+
+</body>
+</html>
