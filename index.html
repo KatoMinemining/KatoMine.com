@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>My Website</title>
+    <title>Katomine</title>
     <style>
         body {
             margin: 0;
@@ -11,51 +11,167 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            background: linear-gradient(180deg, #f0f4ff 0%, #ffffff 100%);
         }
         .top-section {
-            background: #2563eb;
+            background: linear-gradient(135deg, #2563eb, #1e40af);
             color: #ffffff;
             display: flex;
-            justify-content: center;
-            align-items: flex-end;
-            height: 50vh;
+            justify-content: space-between;
+            align-items: flex-start;
+            height: 25vh;
             text-align: center;
-            padding-bottom: 30px;
+            padding: 10px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
         .top-section h2 {
             font-size: 26px;
-            background: rgba(255, 255, 255, 0.15);
             padding: 15px 25px;
-            border-radius: 10px;
-            border: 2px solid #ffffff;
             margin: 0;
+            z-index: 1;
+            transition: transform 0.3s ease;
+        }
+        .top-section h2:hover {
+            transform: scale(1.1);
+        }
+        .referral-code {
+            font-size: 14px;
+            font-weight: 600;
+            width: 100px;
+            height: 35px;
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 8px 12px;
+            border-radius: 8px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+            z-index: 1;
+            cursor: pointer;
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .referral-code:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.5);
+        }
+        .referral-code .tooltip {
+            visibility: hidden;
+            background-color: #ffffff;
+            color: #2563eb;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 10px;
+            position: absolute;
+            z-index: 2;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .referral-code.copied .tooltip {
+            visibility: visible;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+        .bottom-box-container {
+            position: absolute;
+            bottom: 5px;
+            left: 5px;
+            z-index: 1;
+        }
+        .balance {
+            font-size: 14px;
+            font-weight: 600;
+            width: 100px;
+            height: 35px;
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 8px 12px;
+            border-radius: 8px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .balance:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.5);
+        }
+        .bottom-box {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            width: 120px;
+            height: 35px;
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .bottom-box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.5);
         }
         .bottom-section {
             background: #ffffff;
             flex: 1;
-            padding: 40px 20px 70px 20px; /* নিচে নেভ বার জন্য স্পেস */
+            padding: 40px 20px 70px 20px;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
             color: #2563eb;
+            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.05);
         }
         .bottom-section p {
             font-size: 18px;
             max-width: 500px;
+            line-height: 1.6;
+            background: rgba(37, 99, 235, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+        .bottom-section p:hover {
+            transform: translateY(-5px);
+        }
+        .timer-display {
+            font-size: 16px;
+            color: #2563eb;
+            margin-top: 10px;
+            text-align: center;
         }
         footer {
             position: fixed;
             bottom: 0;
             left: 0;
             width: 100%;
-            background: #ffffff;
+            background: linear-gradient(90deg, #ffffff, #f0f4ff);
             color: #000000;
             display: flex;
             justify-content: space-around;
             align-items: center;
-            padding: 10px 0;
-            box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+            padding: 12px 0;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
             z-index: 999;
         }
         footer a {
@@ -63,35 +179,120 @@
             text-decoration: none;
             font-weight: 500;
             font-size: 14px;
-            padding: 8px 10px;
-            border-radius: 6px;
-            transition: background 0.3s, transform 0.2s;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        footer a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background: #2563eb;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        footer a:hover::after {
+            width: 80%;
         }
         footer a:hover {
-            background: rgba(0,0,0,0.1);
-            transform: scale(1.05);
+            background: rgba(37, 99, 235, 0.1);
+            transform: translateY(-3px);
+            color: #2563eb;
+        }
+        .ad-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .ad-content {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        .ad-content p {
+            font-size: 18px;
+            color: #2563eb;
+            margin: 0 0 20px;
+        }
+        .ad-content button {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        .ad-content button:hover {
+            background: linear-gradient(135deg, #1e40af, #2563eb);
         }
         @media (max-width: 480px) {
             .top-section h2 {
                 font-size: 20px;
                 padding: 10px 20px;
             }
+            .referral-code {
+                font-size: 12px;
+                width: 80px;
+                height: 30px;
+                padding: 6px 10px;
+            }
+            .balance {
+                font-size: 12px;
+                width: 80px;
+                height: 30px;
+                padding: 6px 10px;
+            }
+            .bottom-box {
+                width: 100px;
+                height: 30px;
+                font-size: 12px;
+            }
             .bottom-section p {
                 font-size: 16px;
             }
             footer a {
                 font-size: 12px;
-                padding: 6px 8px;
+                padding: 6px 12px;
+            }
+            .ad-content {
+                width: 80%;
             }
         }
     </style>
 </head>
 <body>
     <div class="top-section">
-        <h2>Explore Our Features</h2>
+        <span class="referral-code" id="referralCode">ID: Loading...<span class="tooltip">Copied!</span></span>
+        <h2>Welcome to Katomine</h2>
+        <div class="bottom-box-container">
+            <span class="balance" id="balance">Balance: 0</span>
+        </div>
+        <div class="bottom-box" id="miningButton">Start Mining</div>
     </div>
     <div class="bottom-section">
-        <p>Welcome to our website! Here you can explore powerful mining features, task earnings, and invite friends to grow your network efficiently.</p>
+        <p>Join Katomine and start mining tokens by watching ads! Invite friends and climb the leaderboard.</p>
+        <div class="timer-display" id="timerDisplay"></div>
+    </div>
+    <div class="ad-modal" id="adModal">
+        <div class="ad-content">
+            <p>Ad Placeholder: Watch this ad to start mining!</p>
+            <button id="closeAd">Close Ad</button>
+        </div>
     </div>
     <footer>
         <a href="/home">Home</a>
@@ -100,5 +301,285 @@
         <a href="/invite">Invite</a>
         <a href="/wallet">Wallet</a>
     </footer>
+    <script type="module">
+        // Import Firebase
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
+        import { getDatabase, ref, set, onValue, update } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js';
+        import { firebaseConfig } from './config.js';
+
+        // Initialize Firebase
+        try {
+            const app = initializeApp(firebaseConfig);
+            const database = getDatabase(app);
+            console.log('Firebase initialized successfully');
+
+            // Generate or retrieve user ID
+            function generateUniqueID() {
+                const timestamp = Date.now().toString().slice(-5);
+                const random = Math.floor(100 + Math.random() * 900).toString();
+                return timestamp + random;
+            }
+
+            // Initialize user data
+            async function initializeUserData(userID) {
+                try {
+                    await set(ref(database, 'users/' + userID), {
+                        balance: 0,
+                        miningStartTime: null,
+                        isMining: false
+                    });
+                    console.log('User data initialized for ID:', userID);
+                    return true;
+                } catch (error) {
+                    console.error('Error initializing user data:', error);
+                    document.getElementById('timerDisplay').textContent = 'Error initializing user. Please refresh.';
+                    return false;
+                }
+            }
+
+            // Get or create user ID
+            let userID = localStorage.getItem('userID');
+            if (!userID) {
+                userID = generateUniqueID();
+                localStorage.setItem('userID', userID);
+                initializeUserData(userID).then(success => {
+                    if (success) checkMiningStatus();
+                });
+            } else {
+                const userRef = ref(database, 'users/' + userID);
+                onValue(userRef, (snapshot) => {
+                    if (!snapshot.exists()) {
+                        console.log('No user data found, initializing...');
+                        initializeUserData(userID).then(success => {
+                            if (success) checkMiningStatus();
+                        });
+                    } else {
+                        checkMiningStatus();
+                    }
+                }, { onlyOnce: true });
+            }
+
+            const referralCodeElement = document.getElementById('referralCode');
+            referralCodeElement.textContent = 'ID: ' + userID;
+
+            // Copy ID functionality
+            referralCodeElement.addEventListener('click', () => {
+                navigator.clipboard.writeText(userID).then(() => {
+                    referralCodeElement.classList.add('copied');
+                    setTimeout(() => {
+                        referralCodeElement.classList.remove('copied');
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Failed to copy:', err);
+                });
+            });
+
+            // Ad and Mining Logic
+            const miningButton = document.getElementById('miningButton');
+            const balanceElement = document.getElementById('balance');
+            const adModal = document.getElementById('adModal');
+            const closeAdButton = document.getElementById('closeAd');
+            const timerDisplay = document.getElementById('timerDisplay');
+            const EIGHT_HOURS = 8 * 60 * 60 * 1000; // 8 hours in milliseconds
+            const TOKENS_PER_MINING = 8;
+            let timerInterval = null;
+
+            // Show ad modal
+            function showAd() {
+                console.log('Showing ad modal');
+                adModal.style.display = 'flex';
+            }
+
+            // Update timer display
+            function updateTimerDisplay(remainingTime) {
+                const hours = Math.floor(remainingTime / (1000 * 60 * 60));
+                const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+                miningButton.textContent = `Mining: ${hours}h ${minutes}m ${seconds}s`;
+                timerDisplay.textContent = ''; // Clear timerDisplay since timer is now on button
+            }
+
+            // Start mining process
+            async function startMining() {
+                const miningStartTime = Date.now();
+                try {
+                    await update(ref(database, 'users/' + userID), {
+                        miningStartTime: miningStartTime,
+                        isMining: true
+                    });
+                    console.log('Mining started, time:', new Date(miningStartTime).toLocaleString());
+                    miningButton.style.pointerEvents = 'none';
+                    if (timerInterval) clearInterval(timerInterval);
+                    timerInterval = setInterval(() => {
+                        const timeElapsed = Date.now() - miningStartTime;
+                        const remainingTime = EIGHT_HOURS - timeElapsed;
+                        if (remainingTime <= 0) {
+                            clearInterval(timerInterval);
+                            miningButton.textContent = 'Claim';
+                            miningButton.style.pointerEvents = 'auto';
+                            timerDisplay.textContent = 'Ready to claim!';
+                            console.log('Mining complete, ready to claim');
+                        } else {
+                            updateTimerDisplay(remainingTime);
+                        }
+                    }, 1000);
+                } catch (error) {
+                    console.error('Error starting mining:', error);
+                    miningButton.textContent = 'Start Mining';
+                    miningButton.style.pointerEvents = 'auto';
+                    timerDisplay.textContent = 'Error starting mining. Please try again.';
+                }
+            }
+
+            // Claim tokens
+            function claimTokens() {
+                const userRef = ref(database, 'users/' + userID);
+                onValue(userRef, (snapshot) => {
+                    const data = snapshot.val();
+                    if (!data) {
+                        console.error('No user data found during claim');
+                        timerDisplay.textContent = 'User data not found. Please refresh.';
+                        return;
+                    }
+                    if (data.isMining && data.miningStartTime && (Date.now() - data.miningStartTime >= EIGHT_HOURS)) {
+                        const newBalance = (data.balance || 0) + TOKENS_PER_MINING;
+                        update(ref(database, 'users/' + userID), {
+                            balance: newBalance,
+                            miningStartTime: null,
+                            isMining: false
+                        }).then(() => {
+                            balanceElement.textContent = `Balance: ${newBalance}`;
+                            miningButton.textContent = 'Start Mining';
+                            miningButton.style.pointerEvents = 'auto';
+                            timerDisplay.textContent = '';
+                            if (timerInterval) clearInterval(timerInterval);
+                            console.log('Tokens claimed, new balance:', newBalance);
+                        }).catch(error => {
+                            console.error('Error claiming tokens:', error);
+                            timerDisplay.textContent = 'Error claiming tokens. Please try again.';
+                        });
+                    } else {
+                        console.error('Invalid claim attempt: not mining or time not elapsed');
+                        timerDisplay.textContent = 'Cannot claim yet. Please wait.';
+                    }
+                }, { onlyOnce: true });
+            }
+
+            // Handle mining button click
+            function handleMiningClick() {
+                console.log('Mining button clicked');
+                const userRef = ref(database, 'users/' + userID);
+                onValue(userRef, (snapshot) => {
+                    const data = snapshot.val();
+                    if (!data) {
+                        console.error('No user data found, retrying initialization...');
+                        initializeUserData(userID).then(success => {
+                            if (success) showAd();
+                        });
+                        return;
+                    }
+                    if (!data.isMining) {
+                        showAd();
+                    } else if (data.isMining && data.miningStartTime) {
+                        const timeElapsed = Date.now() - data.miningStartTime;
+                        if (timeElapsed < EIGHT_HOURS) {
+                            miningButton.style.pointerEvents = 'none';
+                            if (timerInterval) clearInterval(timerInterval);
+                            timerInterval = setInterval(() => {
+                                const remainingTime = EIGHT_HOURS - (Date.now() - data.miningStartTime);
+                                if (remainingTime <= 0) {
+                                    clearInterval(timerInterval);
+                                    miningButton.textContent = 'Claim';
+                                    miningButton.style.pointerEvents = 'auto';
+                                    timerDisplay.textContent = 'Ready to claim!';
+                                    console.log('Mining complete, ready to claim');
+                                } else {
+                                    updateTimerDisplay(remainingTime);
+                                }
+                            }, 1000);
+                        } else {
+                            miningButton.textContent = 'Claim';
+                            miningButton.style.pointerEvents = 'auto';
+                            timerDisplay.textContent = 'Ready to claim!';
+                        }
+                    }
+                }, {
+                    onlyOnce: true,
+                    error: (error) => {
+                        console.error('Error fetching user data:', error);
+                        timerDisplay.textContent = 'Error fetching user data. Please try again.';
+                    }
+                });
+            }
+
+            // Check mining status on load
+            function checkMiningStatus() {
+                const userRef = ref(database, 'users/' + userID);
+                onValue(userRef, (snapshot) => {
+                    const data = snapshot.val();
+                    if (!data) {
+                        console.error('No user data found for ID:', userID);
+                        timerDisplay.textContent = 'User data not found. Retrying...';
+                        initializeUserData(userID).then(success => {
+                            if (success) checkMiningStatus();
+                        });
+                        return;
+                    }
+                    balanceElement.textContent = `Balance: ${data.balance || 0}`;
+                    if (data.isMining && data.miningStartTime) {
+                        const timeElapsed = Date.now() - data.miningStartTime;
+                        if (timeElapsed >= EIGHT_HOURS) {
+                            miningButton.textContent = 'Claim';
+                            miningButton.style.pointerEvents = 'auto';
+                            timerDisplay.textContent = 'Ready to claim!';
+                        } else {
+                            miningButton.style.pointerEvents = 'none';
+                            if (timerInterval) clearInterval(timerInterval);
+                            timerInterval = setInterval(() => {
+                                const remainingTime = EIGHT_HOURS - (Date.now() - data.miningStartTime);
+                                if (remainingTime <= 0) {
+                                    clearInterval(timerInterval);
+                                    miningButton.textContent = 'Claim';
+                                    miningButton.style.pointerEvents = 'auto';
+                                    timerDisplay.textContent = 'Ready to claim!';
+                                    console.log('Mining complete, ready to claim');
+                                } else {
+                                    updateTimerDisplay(remainingTime);
+                                }
+                            }, 1000);
+                        }
+                    } else {
+                        miningButton.textContent = 'Start Mining';
+                        miningButton.style.pointerEvents = 'auto';
+                        timerDisplay.textContent = '';
+                    }
+                    console.log('Mining status checked:', data);
+                }, {
+                    onlyOnce: false,
+                    error: (error) => {
+                        console.error('Error checking mining status:', error);
+                        timerDisplay.textContent = 'Error checking status. Please try again.';
+                    }
+                });
+            }
+
+            // Initialize event listeners
+            miningButton.addEventListener('click', () => {
+                console.log('Mining button state:', miningButton.textContent);
+                if (miningButton.textContent === 'Start Mining') {
+                    handleMiningClick();
+                } else if (miningButton.textContent === 'Claim') {
+                    claimTokens();
+                }
+            });
+            closeAdButton.addEventListener('click', () => {
+                adModal.style.display = 'none';
+                startMining();
+            });
+        } catch (error) {
+            console.error('Error initializing Firebase:', error);
+            document.getElementById('timerDisplay').textContent = 'Failed to connect to server. Please try again later.';
+        }
+    </script>
 </body>
 </html>
